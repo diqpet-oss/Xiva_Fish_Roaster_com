@@ -213,7 +213,7 @@ const App: React.FC = () => {
             nickchan9836@foxmail.com
           </a>
         </div>
-      </div>
+      
             <div className="flex space-x-6">
               {['Facebook', 'Instagram', 'Twitter', 'YouTube'].map((social) => (
                 <a key={social} href="#" className="hover:text-white transition-colors text-sm font-semibold">{social}</a>
