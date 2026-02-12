@@ -22,8 +22,8 @@ export const translations: Translations = {
     sections: [
       { id: "s1", num: "01", title: "外酥内嫩，锁住原味", subtitle: "无需担心油烟，尽享美味", desc: "高效循环热量，保持食材水分，烤出诱人色泽。", imageUrl: "/P3.png" },
       { id: "s2", num: "02", title: "上下双面加热管", subtitle: "均匀受热，告别翻面繁琐", desc: "上下大功率发热管同时启动，极速锁鲜。", imageUrl: "/P4.png" },
-      { id: "s3", num: "03", title: "专业陶瓷过滤系统", subtitle: "清新厨房，悦享下厨", desc: "有效过滤油烟微粒，保持空气清新。", imageUrl: "https://picsum.photos/seed/filter3/800/500" },
-      { id: "s4", num: "04", title: "Low-E 高透视窗", subtitle: "全程掌握，精控火候", desc: "特种低辐射玻璃，安全防烫，清晰可见。", imageUrl: "https://picsum.photos/seed/window4/800/500" }
+      { id: "s3", num: "03", title: "专业陶瓷过滤系统", subtitle: "清新厨房，悦享下厨", desc: "有效过滤油烟微粒，保持空气清新。", imageUrl: "/P5.png" },
+      { id: "s4", num: "04", title: "Low-E 高透视窗", subtitle: "全程掌握，精控火候", desc: "特种低辐射玻璃，安全防烫，清晰可见。", imageUrl: "/P2.png" }
     ],
     cookingGuide: {
       title: "快速烹饪指南",
@@ -69,8 +69,8 @@ export const translations: Translations = {
     sections: [
       { id: "s1", num: "01", title: "Crispy & Juicy", subtitle: "Keep the original flavor", desc: "High-efficiency heat circulation maintains moisture while browning the surface.", imageUrl: "/P3.png" },
       { id: "s2", num: "02", title: "Top & Bottom Heating", subtitle: "No more flipping needed", desc: "Powerful dual heating elements ensure even cooking for both sides.", imageUrl: "/P4.png" },
-      { id: "s3", num: "03", title: "Ceramic Filter System", subtitle: "Clean kitchen experience", desc: "Effectively captures oil particles and minimizes smoke.", imageUrl: "https://picsum.photos/seed/filter3/800/500" },
-      { id: "s4", num: "04", title: "Low-E Glass View", subtitle: "Precise control in sight", desc: "Safety low-emissivity glass allows clear viewing without heat loss.", imageUrl: "https://picsum.photos/seed/window4/800/500" }
+      { id: "s3", num: "03", title: "Ceramic Filter System", subtitle: "Clean kitchen experience", desc: "Effectively captures oil particles and minimizes smoke.", imageUrl: "/P5.png" },
+      { id: "s4", num: "04", title: "Low-E Glass View", subtitle: "Precise control in sight", desc: "Safety low-emissivity glass allows clear viewing without heat loss.", imageUrl: "/P2.png" }
     ],
     cookingGuide: {
       title: "Quick Cooking Guide",
@@ -116,8 +116,8 @@ export const translations: Translations = {
     sections: [
       { id: "s1", num: "01", title: "바삭하고 촉촉하게", subtitle: "수분 손실 없이 원재료의 맛 그대로", desc: "고효율 열 순환으로 속까지 완벽하게 익혀줍니다.", imageUrl: "/P3.png" },
       { id: "s2", num: "02", title: "상하 열선 양면 그릴", subtitle: "뒤집을 필요 없는 편리함", desc: "상하 동시 가열로 열 손실을 줄이고 조리 시간을 단축합니다.", imageUrl: "/P4.png" },
-      { id: "s3", num: "03", title: "세라믹 필터 탑재", subtitle: "연기 걱정 없는 쾌적한 주방", desc: "조리 시 발생하는 연기를 최소화하는 반영구 필터입니다.", imageUrl: "https://picsum.photos/seed/filter3/800/500" },
-      { id: "s4", num: "04", title: "Low-E 글라스 조리창", subtitle: "눈으로 확인하는 조리 상태", desc: "특수 코팅 유리로 열 효율은 높이고 안전성은 높였습니다.", imageUrl: "https://picsum.photos/seed/window4/800/500" }
+      { id: "s3", num: "03", title: "세라믹 필터 탑재", subtitle: "연기 걱정 없는 쾌적한 주방", desc: "조리 시 발생하는 연기를 최소화하는 반영구 필터입니다.", imageUrl: "/P5.png" },
+      { id: "s4", num: "04", title: "Low-E 글라스 조리창", subtitle: "눈으로 확인하는 조리 상태", desc: "특수 코팅 유리로 열 효율은 높이고 안전성은 높였습니다.", imageUrl: "/P2.png" }
     ],
     cookingGuide: {
       title: "간편 조리 매뉴얼",
@@ -163,8 +163,8 @@ export const translations: Translations = {
     sections: [
       { id: "s1", num: "01", title: "外はパリッと、中はふわっと", subtitle: "旨味を閉じ込める高効率加热", desc: "素材の水分を逃さず、本来の味を引き出します。", imageUrl: "/P3.png" },
       { id: "s2", num: "02", title: "上下ダブルヒーター", subtitle: "手間いらずの両面焼き", desc: "上下からの強力熱線で、均一に焼き上げます。", imageUrl: "/P4.png" },
-      { id: "s3", num: "03", title: "セラミックフィルター", subtitle: "煙の出にくいクリーン設計", desc: "キッチンを汚さず、快適に調理を楽しめます。", imageUrl: "https://picsum.photos/seed/filter3/800/500" },
-      { id: "s4", num: "04", title: "Low-E ガラス窓", subtitle: "焼き加減を一目で確認", desc: "断熱性に優れた低放射ガラスを採用し、安全性を向上。", imageUrl: "https://picsum.photos/seed/window4/800/500" }
+      { id: "s3", num: "03", title: "セラミックフィルター", subtitle: "煙の出にくいクリーン設計", desc: "キッチンを汚さず、快適に調理を楽しめます。", imageUrl: "/P5.png" },
+      { id: "s4", num: "04", title: "Low-E ガラス窓", subtitle: "焼き加減を一目で確認", desc: "断熱性に優れた低放射ガラスを採用し、安全性を向上。", imageUrl: "/P2.png" }
     ],
     cookingGuide: {
       title: "クイック調理ガイド",
