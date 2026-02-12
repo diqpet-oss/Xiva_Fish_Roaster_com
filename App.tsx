@@ -79,7 +79,7 @@ const App: React.FC = () => {
           <div className="lg:w-1/2 relative group">
             <div className="absolute -inset-4 bg-teal-100 rounded-[3rem] blur-2xl opacity-30 group-hover:opacity-50 transition-opacity"></div>
             <img 
-              src="https://picsum.photos/seed/grill_hero/1000/800" 
+              src="/public/P1.png" 
               alt="XIVA Grill Product" 
               className="relative w-full h-auto rounded-[2.5rem] shadow-2xl object-cover transform hover:scale-[1.02] transition-transform duration-500"
             />
