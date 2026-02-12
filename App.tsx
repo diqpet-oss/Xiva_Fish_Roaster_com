@@ -1,0 +1,234 @@
+
+import React, { useState } from 'react';
+import { translations } from './translations';
+import { Language, TranslationSet } from './types';
+
+const App: React.FC = () => {
+  const [lang, setLang] = useState<Language>('ko');
+  const t: TranslationSet = translations[lang];
+
+  const languages: { code: Language; label: string }[] = [
+    { code: 'zh', label: '中文' },
+    { code: 'en', label: 'English' },
+    { code: 'ko', label: '한국어' },
+    { code: 'ja', label: '日本語' }
+  ];
+
+  return (
+    <div className="min-h-screen font-sans selection:bg-teal-100">
+      {/* Navigation */}
+      <nav className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between h-20 items-center">
+            <div className="flex items-center space-x-2">
+              <span className="text-3xl font-black tracking-tighter text-teal-800">XIVA</span>
+              <div className="h-6 w-[2px] bg-gray-200 hidden sm:block mx-4"></div>
+              <div className="hidden md:flex space-x-8 text-sm font-medium text-gray-600">
+                <a href="#features" className="hover:text-teal-600 transition-colors">{t.nav.features}</a>
+                <a href="#guide" className="hover:text-teal-600 transition-colors">{t.nav.guide}</a>
+                <a href="#specs" className="hover:text-teal-600 transition-colors">{t.nav.specs}</a>
+              </div>
+            </div>
+
+            <div className="flex items-center space-x-4">
+              <div className="relative group">
+                <button className="flex items-center space-x-1 px-3 py-2 bg-gray-100 rounded-lg text-xs font-semibold hover:bg-gray-200 transition-all">
+                  <span>{languages.find(l => l.code === lang)?.label}</span>
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div className="absolute right-0 mt-2 w-32 bg-white border border-gray-100 rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 overflow-hidden">
+                  {languages.map((l) => (
+                    <button
+                      key={l.code}
+                      onClick={() => setLang(l.code)}
+                      className={`w-full px-4 py-2.5 text-left text-xs hover:bg-teal-50 hover:text-teal-700 transition-colors ${lang === l.code ? 'bg-teal-50 text-teal-700 font-bold' : 'text-gray-700'}`}
+                    >
+                      {l.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <section className="relative pt-20 pb-24 overflow-hidden">
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-teal-50/50 -skew-x-12 transform origin-top translate-x-20 -z-10"></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center">
+          <div className="lg:w-1/2 mb-12 lg:mb-0 text-center lg:text-left">
+            <span className="inline-block px-4 py-1.5 bg-orange-100 text-orange-700 text-xs font-bold rounded-full mb-6 uppercase tracking-widest animate-pulse">
+              {t.hero.badge}
+            </span>
+            <h1 className="text-5xl lg:text-7xl font-extrabold text-gray-900 leading-tight mb-6">
+              {t.hero.title}
+            </h1>
+            <p className="text-xl text-gray-600 mb-10 max-w-xl mx-auto lg:mx-0 font-light leading-relaxed">
+              {t.hero.subtitle}
+            </p>
+            <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center lg:justify-start">
+              <a href="#features" className="px-8 py-4 bg-teal-800 text-white font-bold rounded-2xl hover:bg-teal-900 transition-all shadow-xl shadow-teal-900/30">
+                {t.hero.cta}
+              </a>
+              <button className="px-8 py-4 bg-white border-2 border-gray-100 text-gray-800 font-bold rounded-2xl hover:border-teal-200 transition-all">
+                Product Video
+              </button>
+            </div>
+          </div>
+          <div className="lg:w-1/2 relative group">
+            <div className="absolute -inset-4 bg-teal-100 rounded-[3rem] blur-2xl opacity-30 group-hover:opacity-50 transition-opacity"></div>
+            <img 
+              src="https://picsum.photos/seed/grill_hero/1000/800" 
+              alt="XIVA Grill Product" 
+              className="relative w-full h-auto rounded-[2.5rem] shadow-2xl object-cover transform hover:scale-[1.02] transition-transform duration-500"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Main Features Grid */}
+      <section id="features" className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">{t.mainFeatures.title}</h2>
+            <div className="h-1 w-20 bg-teal-800 mx-auto rounded-full"></div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {t.mainFeatures.items.map((item, idx) => (
+              <div key={idx} className="p-8 bg-gray-50 rounded-3xl border border-gray-100 hover:border-teal-500 transition-colors group">
+                <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center mb-6 shadow-sm group-hover:bg-teal-800 group-hover:text-white transition-all">
+                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
+                <h3 className="text-lg font-bold text-gray-900 mb-3">{item.title}</h3>
+                <p className="text-sm text-gray-500 leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Alternating Sections */}
+      {t.sections.map((section, idx) => (
+        <section key={section.id} className={`py-24 ${idx % 2 === 1 ? 'bg-white' : 'bg-gray-50'}`}>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className={`flex flex-col ${idx % 2 === 1 ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center gap-16`}>
+              <div className="lg:w-1/2">
+                <div className="relative">
+                  <div className="absolute -top-10 -left-10 text-9xl font-black text-gray-100/60 z-0">{section.num}</div>
+                  <div className="relative z-10">
+                    <span className="text-teal-600 font-bold uppercase tracking-widest text-sm">{section.subtitle}</span>
+                    <h2 className="text-4xl font-extrabold text-gray-900 mt-4 mb-6 leading-tight">
+                      {section.title}
+                    </h2>
+                    <p className="text-lg text-gray-600 leading-relaxed">
+                      {section.desc}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="lg:w-1/2">
+                <img 
+                  src={section.imageUrl} 
+                  alt={section.title} 
+                  className="w-full h-[400px] object-cover rounded-[3rem] shadow-xl hover:shadow-2xl transition-shadow"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+      ))}
+
+      {/* Cooking Guide Table */}
+      <section id="guide" className="py-24 bg-teal-900 text-white overflow-hidden relative">
+        <div className="absolute top-0 left-0 w-full h-full opacity-10 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold mb-4">{t.cookingGuide.title}</h2>
+            <p className="text-teal-300 font-light italic">Recommended settings for best results</p>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            {t.cookingGuide.items.map((item, idx) => (
+              <div key={idx} className="bg-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/10 flex flex-col items-center justify-center hover:bg-white/20 transition-all cursor-default group">
+                <span className="text-sm font-medium mb-2 group-hover:scale-110 transition-transform">{item.name}</span>
+                <span className="text-teal-300 font-black text-lg">{item.time}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Specs Section */}
+      <section id="specs" className="py-24 bg-white">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-gray-50 rounded-[3rem] p-12 border border-gray-100 shadow-sm">
+            <h2 className="text-3xl font-extrabold text-gray-900 mb-12 text-center">{t.specs.title}</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-12">
+              <div className="flex justify-between py-4 border-b border-gray-200">
+                <span className="text-gray-500 font-medium">Model</span>
+                <span className="text-gray-900 font-bold">{t.specs.model.split(': ')[1]}</span>
+              </div>
+              <div className="flex justify-between py-4 border-b border-gray-200">
+                <span className="text-gray-500 font-medium">Certification</span>
+                <span className="text-gray-900 font-bold">{t.specs.certification.split(': ')[1]}</span>
+              </div>
+              <div className="flex justify-between py-4 border-b border-gray-200">
+                <span className="text-gray-500 font-medium">Power</span>
+                <span className="text-gray-900 font-bold text-right">{t.specs.power.split(': ')[1]}</span>
+              </div>
+              <div className="flex justify-between py-4 border-b border-gray-200">
+                <span className="text-gray-500 font-medium">Release</span>
+                <span className="text-gray-900 font-bold">{t.specs.date.split(': ')[1]}</span>
+              </div>
+              <div className="flex justify-between py-4 border-b border-gray-200">
+                <span className="text-gray-500 font-medium">Dimensions</span>
+                <span className="text-gray-900 font-bold">{t.specs.size.split(': ')[1]}</span>
+              </div>
+              <div className="flex justify-between py-4 border-b border-gray-200">
+                <span className="text-gray-500 font-medium">Weight</span>
+                <span className="text-gray-900 font-bold">{t.specs.weight.split(': ')[1]}</span>
+              </div>
+            </div>
+            <div className="mt-12 p-8 bg-white rounded-3xl border border-gray-100 flex flex-col md:flex-row items-center justify-between">
+              <div className="mb-6 md:mb-0">
+                <p className="text-sm text-gray-500">Manufacturer</p>
+                <p className="text-xl font-black text-teal-800 tracking-tighter">XIVA Global Technology Co., Ltd.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-900 text-gray-400 py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row justify-between items-center mb-12">
+            <div className="mb-8 md:mb-0">
+              <span className="text-4xl font-black tracking-tighter text-white">XIVA</span>
+              <p className="mt-4 max-w-xs leading-relaxed">
+                Empowering kitchens with innovative technology and sleek design since 2024.
+              </p>
+            </div>
+            <div className="flex space-x-6">
+              {['Facebook', 'Instagram', 'Twitter', 'YouTube'].map((social) => (
+                <a key={social} href="#" className="hover:text-white transition-colors text-sm font-semibold">{social}</a>
+              ))}
+            </div>
+          </div>
+          <div className="pt-12 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center text-xs">
+            <p>&copy; 2024 XIVA Global Technology. All rights reserved.</p>
+            <div className="flex space-x-8 mt-6 md:mt-0">
+              <a href="#" className="hover:text-white">Privacy Policy</a>
+              <a href="#" className="hover:text-white">Terms of Service</a>
+              <a href="#" className="hover:text-white">Warranty Info</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+export default App;
