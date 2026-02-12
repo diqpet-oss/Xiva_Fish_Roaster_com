@@ -191,8 +191,8 @@ export const translations: Translations = {
       size: "الحجم: 480x275x200 ملم",
       weight: "الوزن: 4.33 كجم"
     }
-  }
-  
+  },
+
   ko: {
     nav: { features: "특징", specs: "상세정보", guide: "조리안내", buy: "구매하기" },
     hero: {
