@@ -189,12 +189,7 @@ const App: React.FC = () => {
                 </div>
               ))}
             </div>
-            <div className="mt-10 p-6 lg:p-8 bg-white rounded-2xl lg:rounded-3xl border border-gray-100 flex flex-col md:flex-row items-center justify-between text-center md:text-left">
-              <div className="mb-4 md:mb-0">
-                <p className="text-xs text-gray-500 mb-1">Manufacturer</p>
-                <p className="text-lg lg:text-xl font-black text-teal-800 tracking-tighter">XIVA Global Technology Co., Ltd.</p>
-              </div>
-            </div>
+           
           </div>
         </div>
       </section>
