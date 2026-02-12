@@ -79,10 +79,10 @@ const App: React.FC = () => {
           <div className="lg:w-1/2 relative group">
             <div className="absolute -inset-4 bg-teal-100 rounded-[3rem] blur-2xl opacity-30 group-hover:opacity-50 transition-opacity"></div>
             <img 
-              src="image/1.jpg" 
-              alt="XIVA Grill Product" 
-              className="relative w-full h-auto rounded-[2.5rem] shadow-2xl object-cover transform hover:scale-[1.02] transition-transform duration-500"
-            />
+  src="/image/1.jpg"  // 路径前加斜杠，代表从根目录（public）寻找
+  alt="XIVA Grill Product" 
+  className="relative w-full h-auto rounded-[2.5rem] shadow-2xl object-cover transform hover:scale-[1.02] transition-transform duration-500"
+/>
           </div>
         </div>
       </section>
