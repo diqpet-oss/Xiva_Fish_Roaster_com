@@ -3,7 +3,7 @@ import { translations } from './translations';
 
 const App: React.FC = () => {
   // 状态管理：当前语言与选中颜色
-  const [lang, setLang] = useState('zh'); 
+  const [lang, setLang] = useState('ko'); 
   const [selectedColor, setSelectedColor] = useState('Green');
 
   // 获取当前语言包，若不存在则降级为英文
@@ -11,7 +11,7 @@ const App: React.FC = () => {
   const isRTL = lang === 'ar';
 
   const languages = [
-    { code: 'zh', label: '中文' },
+   // { code: 'zh', label: '中文' },
     { code: 'en', label: 'English' },
     { code: 'ko', label: '한국어' },
     { code: 'ja', label: '日本語' },
