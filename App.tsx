@@ -1,83 +1,23 @@
 import React, { useState } from 'react';
-
-// --- 1. 完整翻译数据包（直接内置，确保调用不会出错） ---
-const translations: any = {
-  zh: {
-    nav: { features: "产品特性", specs: "规格参数", guide: "烹饪指南", buy: "立即购买" },
-    hero: {
-      badge: "无需翻面，告别油烟",
-      title: "XIVA 双面多功能鱼类烧烤机",
-      subtitle: "双面加热技术，锁住鲜甜肉汁，外酥内嫩的完美体验。",
-      cta: "探索更多"
-    },
-    mainFeatures: {
-      title: "核心优势",
-      items: [
-        { title: "双面加热", desc: "上下发热管同时加热，无需翻面" },
-        { title: "陶瓷过滤", desc: "内置陶瓷过滤网，减少油烟" },
-        { title: "透明视窗", desc: "随时观察烹饪状态，不丢失热量" },
-        { title: "自动定时", desc: "5-30分钟设定，省心省力" }
-      ]
-    },
-    sections: [
-      { id: "s1", num: "01", title: "外酥内嫩，锁住原味", subtitle: "无需担心油烟", desc: "高效循环热量，保持食材水分，烤出诱人色泽。" },
-      { id: "s2", num: "02", title: "上下双面加热管", subtitle: "均匀受热", desc: "上下大功率发热管同时启动，极速锁鲜。" },
-      { id: "s3", num: "03", title: "专业陶瓷过滤系统", subtitle: "清新厨房", desc: "有效过滤油烟微粒，保持空气清新。" },
-      { id: "s4", num: "04", title: "Low-E 高透视窗", subtitle: "全程掌握", desc: "特种低辐射玻璃，安全防烫，清晰可见。" }
-    ],
-    cookingGuide: {
-      title: "快速烹饪指南",
-      items: [
-        { name: "大虾", time: "10~12分" }, { name: "年糕", time: "5~6分" },
-        { name: "比目鱼", time: "15~20分" }, { name: "披萨", time: "12~15分" },
-        { name: "秋刀鱼", time: "20~25分" }, { name: "五花肉", time: "12~15分" },
-        { name: "青鱼", time: "25~30分" }, { name: "地瓜", time: "20~30分" }
-      ]
-    },
-    specs: {
-      title: "产品详细规格",
-      model: "型号: KSJ-FG600",
-      certification: "安全认证: SU072738-22002",
-      power: "额定功率: 220-240V~, 1100W",
-      date: "发布日期: 2024年06月",
-      size: "尺寸: 480x275x200mm",
-      weight: "重量: 4.33kg"
-    }
-  },
-  en: {
-    nav: { features: "Features", specs: "Specs", guide: "Guide", buy: "Buy Now" },
-    hero: { badge: "No Flipping, No Smoke", title: "XIVA Double-Sided Multi Grill", subtitle: "Advanced double-sided heating technology for a juicy inside and crispy outside.", cta: "Explore More" },
-    mainFeatures: { title: "Key Advantages", items: [{ title: "Double-Sided", desc: "Heating from top and bottom simultaneously" }, { title: "Ceramic Filter", desc: "Reduces smoke and odors significantly" }, { title: "Glass Window", desc: "Monitor your cooking without opening the lid" }, { title: "Auto Timer", desc: "5-30 minute settings" }] },
-    sections: [
-        { id: "s1", num: "01", title: "Crispy & Juicy", subtitle: "No Smoke", desc: "High-efficiency heat circulation maintains moisture." },
-        { id: "s2", num: "02", title: "Top & Bottom Heating", subtitle: "Even Heat", desc: "Powerful dual heating elements ensure even cooking." },
-        { id: "s3", num: "03", title: "Ceramic Filter", subtitle: "Clean Kitchen", desc: "Effectively captures oil particles." },
-        { id: "s4", num: "04", title: "Low-E Glass View", subtitle: "Full Control", desc: "Safety low-emissivity glass allows clear viewing." }
-    ],
-    cookingGuide: { title: "Quick Cooking Guide", items: [{ name: "Shrimp", time: "10~12m" }, { name: "Pork", time: "12~15m" }] },
-    specs: { title: "Technical Specs", model: "Model: KSJ-FG600", certification: "Cert: SU072738-22002", power: "Power: 1100W", date: "Release: 2024", size: "Size: 480x275x200mm", weight: "Weight: 4.33kg" }
-  },
-  ko: {
-    nav: { features: "특징", specs: "상세정보", guide: "조리안내", buy: "구매하기" },
-    hero: { badge: "뒤집을 필요 없는 간편 조리", title: "XIVA 양면 멀티 생선 그릴", subtitle: "상하 더블 히팅으로 겉은 바삭하고 속은 촉촉하게.", cta: "더 보기" },
-    mainFeatures: { title: "주요 특징", items: [{ title: "양면 그릴", desc: "상하 열선으로 뒤집을 필요 없는 조리" }, { title: "세라믹 필터", desc: "냄새와 연기를 잡아주는 세라믹 필터" }, { title: "투명 조리창", desc: "조리 과정을 직접 확인할 수 있는 창" }, { title: "자동 타이머", desc: "5~30분 설정 가능한 간편 타이머" }] },
-    sections: [
-        { id: "s1", num: "01", title: "바삭하고 촉촉하게", subtitle: "연기 걱정 없음", desc: "고효율 열 순환으로 속까지 완벽하게 익혀줍니다." },
-        { id: "s2", num: "02", title: "상하 열선 양면 그릴", subtitle: "균일한 가열", desc: "상하 동시 가열로 열 손실을 줄이고 조리 시간을 단축합니다." },
-        { id: "s3", num: "03", title: "세라믹 필터 탑재", subtitle: "쾌적한 주방", desc: "조리 시 발생하는 연기를 최소화하는 반영구 필터입니다." },
-        { id: "s4", num: "04", title: "Low-E 글라스 조리창", subtitle: "완벽한 컨트롤", desc: "특수 코팅 유리로 열 효율은 높이고 안전성은 높였습니다." }
-    ],
-    cookingGuide: { title: "간편 조리 매뉴얼", items: [{ name: "대하", time: "10~12분" }, { name: "고등어", time: "25~30분" }] },
-    specs: { title: "제품 상세 정보", model: "모델명: KSJ-FG600", certification: "인증: SU072738-22002", power: "소비전력: 1100W", date: "출시: 2024.06", size: "크기: 480x275x200mm", weight: "무게: 4.33kg" }
-  }
-};
+// 假设你的类型定义和翻译文件在同级目录
+// import { translations } from './translations';
+// import { Language, TranslationSet } from './types';
 
 const App: React.FC = () => {
-  // 状态：语言与颜色
-  const [lang, setLang] = useState('zh');
-  const [selectedColor, setSelectedColor] = useState('Green');
+  // 1. 状态管理：语言 & 颜色
+  const [lang, setLang] = useState('ko'); // 默认韩语
+  const [selectedColor, setSelectedColor] = useState('Green'); // 默认绿色
 
-  const t = translations[lang] || translations['en'];
+  // 2. 颜色配置表 (对应图片前缀: Green, Silver, White, Yellow)
+  const colorOptions = [
+    { id: 'Green', name: { zh: '森林绿', en: 'Forest Green', ko: '포레스트 그린' }, hex: '#3d5a5a' },
+    { id: 'Silver', name: { zh: '太空银', en: 'Space Silver', ko: '스페이스 실버' }, hex: '#c0c0c0' },
+    { id: 'White', name: { zh: '珍珠白', en: 'Pearl White', ko: '펄 화이트' }, hex: '#f5f5f5' },
+    { id: 'Yellow', name: { zh: '活力橙', en: 'Active Orange', ko: '액티브 오렌지' }, hex: '#e67e22' },
+  ];
+
+  // 模拟翻译数据结构 (需确保你的 translations 文件包含这些)
+  const t = translations[lang];
   const isRTL = lang === 'ar';
 
   const languages = [
@@ -89,114 +29,242 @@ const App: React.FC = () => {
     { code: 'ar', label: 'العربية' }
   ];
 
-  const colorOptions = [
-    { id: 'Green', name: { zh: '森林绿', en: 'Green', ko: '그린' }, hex: '#3d5a5a' },
-    { id: 'Silver', name: { zh: '太空银', en: 'Silver', ko: '실버' }, hex: '#c0c0c0' },
-    { id: 'White', name: { zh: '珍珠白', en: 'White', ko: '화이트' }, hex: '#f5f5f5' },
-    { id: 'Yellow', name: { zh: '活力橙', en: 'Orange', ko: '옐로우' }, hex: '#e67e22' },
-  ];
-
   return (
-    <div dir={isRTL ? 'rtl' : 'ltr'} className={`min-h-screen font-sans bg-white ${isRTL ? 'text-right' : 'text-left'}`}>
+    <div dir={isRTL ? 'rtl' : 'ltr'} className={`min-h-screen font-sans selection:bg-teal-100 bg-white ${isRTL ? 'text-right' : 'text-left'}`}>
       
       {/* 导航栏 */}
-      <nav className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm px-4 h-20 flex justify-between items-center">
-        <span className="text-3xl font-black text-teal-800 tracking-tighter">XIVA</span>
-        <div className="flex gap-4">
-          <select 
-            value={lang} 
-            onChange={(e) => setLang(e.target.value)}
-            className="bg-gray-100 border-none rounded-lg text-xs p-2 focus:ring-2 focus:ring-teal-500"
-          >
-            {languages.map(l => <option key={l.code} value={l.code}>{l.label}</option>)}
-          </select>
+      <nav className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between h-20 items-center">
+            <div className={`flex items-center ${isRTL ? 'space-x-reverse' : ''} space-x-2`}>
+              <span className="text-3xl font-black tracking-tighter text-teal-800">XIVA</span>
+              <div className="h-6 w-[2px] bg-gray-200 hidden sm:block mx-4"></div>
+              <div className={`hidden md:flex ${isRTL ? 'space-x-reverse' : ''} space-x-8 text-sm font-medium text-gray-600`}>
+                <a href="#features" className="hover:text-teal-600 transition-colors">{t.nav.features}</a>
+                <a href="#guide" className="hover:text-teal-600 transition-colors">{t.nav.guide}</a>
+                <a href="#specs" className="hover:text-teal-600 transition-colors">{t.nav.specs}</a>
+              </div>
+            </div>
+
+            <div className="flex items-center">
+              <div className="relative group">
+                <button className={`flex items-center ${isRTL ? 'space-x-reverse' : ''} space-x-1 px-3 py-2 bg-gray-100 rounded-lg text-xs font-semibold hover:bg-gray-200 transition-all`}>
+                  <span>{languages.find(l => l.code === lang)?.label}</span>
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div className={`absolute ${isRTL ? 'left-0' : 'right-0'} mt-2 w-32 bg-white border border-gray-100 rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 overflow-hidden`}>
+                  {languages.map((l) => (
+                    <button
+                      key={l.code}
+                      onClick={() => setLang(l.code)}
+                      className={`w-full px-4 py-2.5 ${isRTL ? 'text-right' : 'text-left'} text-xs hover:bg-teal-50 hover:text-teal-700 transition-colors ${lang === l.code ? 'bg-teal-50 text-teal-700 font-bold' : 'text-gray-700'}`}
+                    >
+                      {l.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </nav>
 
-      {/* Hero 区域 - 核心颜色切换逻辑 */}
-      <section className="max-w-7xl mx-auto px-4 py-12 flex flex-col lg:flex-row items-center gap-10">
-        <div className="flex-1">
-          <span className="px-4 py-1 bg-orange-100 text-orange-700 text-xs font-bold rounded-full inline-block mb-4">{t.hero.badge}</span>
-          <h1 className="text-4xl lg:text-6xl font-extrabold text-gray-900 mb-6 leading-tight">{t.hero.title}</h1>
-          
-          {/* 颜色选择器组件 */}
-          <div className="mb-10">
-            <p className="text-xs font-bold text-gray-400 mb-4 uppercase tracking-widest">Select Finish / 选择颜色</p>
-            <div className="flex gap-4">
-              {colorOptions.map((c) => (
-                <button 
-                  key={c.id} 
-                  onClick={() => setSelectedColor(c.id)} 
-                  className="group flex flex-col items-center gap-2"
-                >
-                  <div 
-                    className={`w-10 h-10 rounded-full border-2 transition-all duration-300 ${selectedColor === c.id ? 'border-teal-600 scale-110 shadow-lg' : 'border-transparent hover:border-gray-200'}`} 
-                    style={{ backgroundColor: c.hex }} 
-                  />
-                  <span className={`text-[10px] font-bold ${selectedColor === c.id ? 'text-teal-800' : 'text-gray-400'}`}>
-                    {c.name[lang as keyof typeof c.name] || c.id}
-                  </span>
-                </button>
-              ))}
+      {/* 首屏展示 (Hero) */}
+      <section className="relative pt-12 pb-20 lg:pt-20 lg:pb-24 overflow-hidden">
+        <div className={`absolute top-0 ${isRTL ? 'left-0' : 'right-0'} w-1/2 h-full bg-teal-50/50 ${isRTL ? 'skew-x-12' : '-skew-x-12'} transform origin-top translate-x-20 -z-10`}></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center">
+          <div className="lg:w-1/2 mb-12 lg:mb-0 text-center lg:text-start">
+            <span className="inline-block px-4 py-1.5 bg-orange-100 text-orange-700 text-xs font-bold rounded-full mb-6 uppercase tracking-widest animate-pulse">
+              {t.hero.badge}
+            </span>
+            <h1 className="text-4xl lg:text-7xl font-extrabold text-gray-900 leading-tight mb-6">
+              {t.hero.title}
+            </h1>
+            
+            {/* 颜色选择器组件 */}
+            <div className="mb-10 flex flex-col items-center lg:items-start">
+               <p className="text-xs font-bold text-gray-400 mb-4 uppercase tracking-widest">Select Finish / 选择外观</p>
+               <div className="flex gap-4">
+                 {colorOptions.map((color) => (
+                   <button
+                    key={color.id}
+                    onClick={() => setSelectedColor(color.id)}
+                    className="group flex flex-col items-center gap-2"
+                   >
+                     <div 
+                      className={`w-10 h-10 rounded-full border-2 transition-all duration-300 flex items-center justify-center ${
+                        selectedColor === color.id ? 'border-teal-600 scale-110 shadow-lg' : 'border-transparent hover:border-gray-200'
+                      }`}
+                     >
+                        <div className="w-7 h-7 rounded-full shadow-inner" style={{ backgroundColor: color.hex }} />
+                     </div>
+                     <span className={`text-[10px] font-bold transition-colors ${selectedColor === color.id ? 'text-teal-800' : 'text-gray-400'}`}>
+                        {color.name[lang as keyof typeof color.name] || color.name.en}
+                     </span>
+                   </button>
+                 ))}
+               </div>
+            </div>
+
+            <p className="text-lg lg:text-xl text-gray-600 mb-10 max-w-xl mx-auto lg:mx-0 font-light leading-relaxed">
+              {t.hero.subtitle}
+            </p>
+            <div className={`flex flex-col sm:flex-row space-y-4 sm:space-y-0 ${isRTL ? 'sm:space-x-reverse' : ''} sm:space-x-4 justify-center lg:justify-start`}>
+              <a href="#features" className="px-8 py-4 bg-teal-800 text-white font-bold rounded-2xl hover:bg-teal-900 transition-all shadow-xl shadow-teal-900/30 text-center">
+                {t.hero.cta}
+              </a>
+              <button className="px-8 py-4 bg-white border-2 border-gray-100 text-gray-800 font-bold rounded-2xl hover:border-teal-200 transition-all">
+                Product Video
+              </button>
             </div>
           </div>
-
-          <p className="text-lg text-gray-600 mb-10 max-w-xl font-light leading-relaxed">{t.hero.subtitle}</p>
-          <button className="bg-teal-800 text-white px-8 py-4 rounded-2xl font-bold hover:bg-teal-900 transition-all shadow-xl shadow-teal-900/30">
-            {t.hero.cta}
-          </button>
-        </div>
-        
-        <div className="flex-1 relative">
-          <div className="absolute -inset-4 bg-teal-100 rounded-[3rem] blur-2xl opacity-20"></div>
-          {/* 这里通过 key 属性强制触发重新渲染动画 */}
-          <img 
-            key={selectedColor} 
-            src={`/${selectedColor}_P1.png`} 
-            alt="XIVA Product" 
-            className="relative w-full h-auto rounded-[2.5rem] shadow-2xl transition-all duration-500 animate-in fade-in zoom-in-95" 
-          />
+          
+          <div className="lg:w-1/2 relative group">
+            <div className="absolute -inset-4 bg-teal-100 rounded-[3rem] blur-2xl opacity-30 group-hover:opacity-50 transition-opacity"></div>
+            {/* 主图根据颜色动态切换 P1 */}
+            <img 
+              key={selectedColor} // 增加 key 强制重新渲染动画
+              src={`/${selectedColor}_P1.png`} 
+              alt={`XIVA Grill ${selectedColor}`} 
+              className="relative w-full h-auto rounded-[2.5rem] shadow-2xl object-cover transform hover:scale-[1.02] transition-all duration-500 animate-in fade-in zoom-in-95"
+            />
+          </div>
         </div>
       </section>
 
-      {/* 详情介绍区 - 图片随颜色动态变化 */}
-      {t.sections.map((section: any, idx: number) => (
-        <section key={section.id} className={`py-20 ${idx % 2 === 1 ? 'bg-gray-50' : 'bg-white'}`}>
-          <div className={`max-w-7xl mx-auto px-4 flex flex-col lg:flex-row items-center gap-12 ${idx % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
-            <div className="flex-1">
-              <span className="text-teal-600 font-bold uppercase tracking-widest text-sm">{section.subtitle}</span>
-              <h2 className="text-3xl font-extrabold text-gray-900 mt-2 mb-6 leading-tight">{section.title}</h2>
-              <p className="text-gray-600 text-lg leading-relaxed">{section.desc}</p>
-            </div>
-            <div className="flex-1">
-              {/* 根据颜色状态自动切换对应的详情图：Green_P2.png, Green_P3.png 等 */}
-              <img 
-                src={`/${selectedColor}_P${idx + 2}.png`} 
-                alt={section.title} 
-                className="w-full h-auto rounded-[2.5rem] shadow-xl hover:shadow-2xl transition-all" 
-              />
-            </div>
+      {/* 核心亮点 */}
+      <section id="features" className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">{t.mainFeatures.title}</h2>
+            <div className="h-1 w-20 bg-teal-800 mx-auto rounded-full"></div>
           </div>
-        </section>
-      ))}
-
-      {/* 参数规格表格 */}
-      <section id="specs" className="py-20 bg-white">
-        <div className="max-w-3xl mx-auto px-4 bg-gray-50 rounded-[2.5rem] p-10 border border-gray-100 shadow-sm">
-          <h2 className="text-3xl font-extrabold text-gray-900 text-center mb-10">{t.specs.title}</h2>
-          <div className="grid grid-cols-1 gap-4">
-            {Object.entries(t.specs).map(([key, val]: any) => (
-              <div key={key} className="flex justify-between py-3 border-b border-gray-200">
-                <span className="text-gray-500 font-medium">{key === 'title' ? '' : val.split(': ')[0]}</span>
-                <span className="text-gray-900 font-bold text-right">{key === 'title' ? '' : val.split(': ')[1]}</span>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8">
+            {t.mainFeatures.items.map((item, idx) => (
+              <div key={idx} className={`p-5 lg:p-8 bg-gray-50 rounded-2xl lg:rounded-3xl border border-gray-100 hover:border-teal-500 transition-colors group flex flex-col items-center text-center lg:items-start ${isRTL ? 'lg:text-right' : 'lg:text-left'}`}>
+                <div className="w-12 h-12 lg:w-14 lg:h-14 bg-white rounded-xl lg:rounded-2xl flex items-center justify-center mb-4 lg:mb-6 shadow-sm group-hover:bg-teal-800 group-hover:text-white transition-all">
+                  {idx === 0 && <svg className="w-6 h-6 lg:w-8 lg:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>}
+                  {idx === 1 && <svg className="w-6 h-6 lg:w-8 lg:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" /></svg>}
+                  {idx === 2 && <svg className="w-6 h-6 lg:w-8 lg:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>}
+                  {idx === 3 && <svg className="w-6 h-6 lg:w-8 lg:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>}
+                </div>
+                <h3 className="text-sm lg:text-lg font-bold text-gray-900 mb-2">{item.title}</h3>
+                <p className="text-[10px] lg:text-sm text-gray-500 leading-relaxed line-clamp-2">{item.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <footer className="py-12 text-center text-gray-400 text-xs border-t">
-        <p>© 2026 XIVA Global Technology. Contact: nickchan9836@foxmail.com</p>
+      {/* 联动详情页展示 (P2, P3, P4...) */}
+      {t.sections.map((section, idx) => (
+        <section key={section.id} className={`py-20 ${idx % 2 === 1 ? 'bg-white' : 'bg-gray-50'}`}>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className={`flex flex-col ${idx % 2 === 1 ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center gap-12 lg:gap-16`}>
+              <div className="lg:w-1/2">
+                <div className="relative">
+                  <div className="absolute -top-10 -left-6 lg:-left-10 text-7xl lg:text-9xl font-black text-gray-100/60 z-0">{section.num}</div>
+                  <div className="relative z-10">
+                    <span className="text-teal-600 font-bold uppercase tracking-widest text-xs lg:text-sm">{section.subtitle}</span>
+                    <h2 className="text-3xl lg:text-4xl font-extrabold text-gray-900 mt-4 mb-6 leading-tight">
+                      {section.title}
+                    </h2>
+                    <p className="text-base lg:text-lg text-gray-600 leading-relaxed">
+                      {section.desc}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="lg:w-1/2 w-full">
+                {/* 这里的图片逻辑：Green_P2.png, Green_P3.png 等 */}
+                <img 
+                  src={`/${selectedColor}_P${idx + 2}.png`} 
+                  alt={section.title} 
+                  className="w-full h-[300px] lg:h-[450px] object-cover rounded-[2.5rem] lg:rounded-[3rem] shadow-xl hover:shadow-2xl transition-all duration-700"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+      ))}
+
+      {/* 烹饪指南 */}
+      <section id="guide" className="py-20 bg-teal-900 text-white overflow-hidden relative">
+        <div className="absolute top-0 left-0 w-full h-full opacity-10 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4">{t.cookingGuide.title}</h2>
+            <p className="text-teal-300 font-light italic">Recommended settings for best results</p>
+          </div>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            {t.cookingGuide.items.map((item, idx) => (
+              <div key={idx} className="bg-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/10 flex flex-col items-center justify-center hover:bg-white/20 transition-all cursor-default group">
+                <span className="text-sm font-medium mb-2 group-hover:scale-110 transition-transform">{item.name}</span>
+                <span className="text-teal-300 font-black text-lg">{item.time}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 参数表 */}
+      <section id="specs" className="py-20 bg-white">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-gray-50 rounded-[2.5rem] lg:rounded-[3.5rem] p-8 lg:p-12 border border-gray-100 shadow-sm">
+            <h2 className="text-3xl font-extrabold text-gray-900 mb-10 text-center">{t.specs.title}</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-12">
+              {[
+                { label: 'Model', val: t.specs.model.split(': ')[1] },
+                { label: 'Certification', val: t.specs.certification.split(': ')[1] },
+                { label: 'Power', val: t.specs.power.split(': ')[1] },
+                { label: 'Release', val: t.specs.date.split(': ')[1] },
+                { label: 'Dimensions', val: t.specs.size.split(': ')[1] },
+                { label: 'Weight', val: t.specs.weight.split(': ')[1] }
+              ].map((spec, i) => (
+                <div key={i} className="flex justify-between py-4 border-b border-gray-200">
+                  <span className="text-gray-500 font-medium text-sm">{spec.label}</span>
+                  <span className="text-gray-900 font-bold text-sm text-right">{spec.val}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-900 text-gray-400 py-16 lg:py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row justify-between items-center mb-12">
+            <div className="mb-8 md:mb-0 text-center md:text-left">
+              <span className="text-4xl font-black tracking-tighter text-white">XIVA</span>
+              <p className="mt-4 max-w-xs leading-relaxed text-sm">
+                Empowering kitchens with innovative technology and sleek design since 2024.
+              </p>
+              <div className="mt-6 flex items-center justify-center md:justify-start text-teal-400 hover:text-teal-300 transition-colors">
+                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                <a href="mailto:nickchan9836@foxmail.com" className="text-sm font-bold tracking-wider">
+                  nickchan9836@foxmail.com
+                </a>
+              </div>
+            </div>
+      
+            <div className="flex space-x-6">
+              {['Facebook', 'Instagram', 'Twitter', 'YouTube'].map((social) => (
+                <a key={social} href="#" className="hover:text-white transition-colors text-sm font-semibold">{social}</a>
+              ))}
+            </div>
+          </div>
+          <div className="pt-10 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center text-[10px] lg:text-xs">
+            <p>&copy; 2024 XIVA Global Technology. All rights reserved.</p>
+            <div className="flex space-x-6 mt-6 md:mt-0">
+              <a href="#" className="hover:text-white">Privacy Policy</a>
+              <a href="#" className="hover:text-white">Terms of Service</a>
+              <a href="#" className="hover:text-white">Warranty Info</a>
+            </div>
+          </div>
+        </div>
       </footer>
     </div>
   );
