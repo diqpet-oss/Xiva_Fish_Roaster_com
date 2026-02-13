@@ -60,7 +60,7 @@ const App: React.FC = () => {
             
             {/* 颜色选择器 */}
             <div className="mb-10 flex flex-col items-center lg:items-start">
-              <p className="text-xs font-bold text-gray-400 mb-4 uppercase tracking-widest">Select Finish / 选择外观</p>
+              <p className="text-xs font-bold text-gray-400 mb-4 uppercase tracking-widest">Select Finish / Select Color</p>
               <div className="flex gap-4">
                 {colorOptions.map((color) => (
                   <button 
