@@ -1,7 +1,6 @@
-
 import { Translations } from './types';
 
-// 导出完整的翻译对象
+// Exporting the complete multi-language translation object
 export const translations: any = {
   zh: {
     nav: { features: "产品特性", specs: "规格参数", guide: "烹饪指南", buy: "立即购买" },
@@ -227,7 +226,7 @@ export const translations: any = {
       title: "Технические характеристики",
       model: "Модель: KSJ-FG600",
       certification: "Сертификат: SU072738-22002",
-      power: "Мощность: 220-240V~, 1100W",
+      power: "Мощность: 220-240V~, 1100Вт",
       date: "Выпуск: Июнь 2024",
       size: "Размер: 480x275x200 мм",
       weight: "Вес: 4.33 кг"
@@ -259,12 +258,12 @@ export const translations: any = {
     cookingGuide: {
       title: "دليل الطهي السريع",
       items: [
-        { name: "جمبري", time: "10~12 دقيقة" },
+        { name: "جمبري كبير", time: "10~12 دقيقة" },
         { name: "كعك الأرز", time: "5~6 دقيقة" },
         { name: "سمك مفلطح", time: "15~20 دقيقة" },
         { name: "بيتزا", time: "12~15 دقيقة" },
         { name: "سمك صوري", time: "20~25 دقيقة" },
-        { name: "لحم الخنزير", time: "12~15 دقيقة" },
+        { name: "لحم بطن الخنزير", time: "12~15 دقيقة" },
         { name: "ماكريل", time: "25~30 دقيقة" },
         { name: "بطاطا حلوة", time: "20~30 دقيقة" }
       ]
@@ -274,7 +273,7 @@ export const translations: any = {
       model: "الموديل: KSJ-FG600",
       certification: "شهادة السلامة: SU072738-22002",
       power: "الطاقة: 220-240 فولت~، 1100 واط",
-      date: "الإصدار: يونيو 2024",
+      date: "تاريخ الإصدار: يونيو 2024",
       size: "الحجم: 480x275x200 ملم",
       weight: "الوزن: 4.33 كجم"
     }
